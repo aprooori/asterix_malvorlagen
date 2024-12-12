@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asterix Malvorlagen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin: 0;
+            padding: 20px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            background-color: orange;
+            padding: 10px 0;
+            width: 100%;
+            position: relative;
+        }
+        .header img {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: auto;
+        }
+        .footer {
+            background-color: orange;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            color: white;
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .gallery button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .gallery button img {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.2s;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .gallery button img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .templates {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .templates button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .templates button img {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+        .templates button img:hover {
+            transform: scale(1.1);
+        }
+        .back-button {
+            display: inline-block;
+            width: 100px;
+            height: 20px;
+            margin: 20px auto;
+            padding: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 20px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+        .background-image {
+            background-image: url('file:///C:/Users/arifm/Downloads/Asterix/asterix-obelix-heroes-119139.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="background-image">
+    <div class="header">
+        <img src="file:///C:/Users/arifm/Downloads/Asterix/Logo_HTL_Dornbirn.jpg" alt="HTL Dornbirn Logo">
+        <h1>Asterix Malvorlagen</h1>
+    </div>
+
+    <div class="gallery" id="mainMenu">
+        <button onclick="showImages('asterix')">    
+            <img src="file:///C:/Users/arifm/Downloads/Asterix/asterix-button.gif" alt="Asterix">
+        </button>
+        <button onclick="showImages('obelix')">
+            <img src="file:///C:/Users/arifm/Downloads/Asterix/obelix-button.webp" alt="Obelix">
+        </button>
+        <button onclick="showImages('idefix')">
+            <img src="file:///C:/Users/arifm/Downloads/Asterix/idefix-button.png" alt="Idefix">
+        </button>        
+    </div>
+    <div class="templates" id="images" style="display: none;"></div>
+    <a href="#" class="back-button" id="backButton" style="display: none;" onclick="goBack()">Zurück</a>
+
+    <div class="footer">
+        Bei Problemen senden sie eine Mail an arif.milanovic@icloud.com
+    </div>
+
+    <script>
+        const templates = {
+            asterix: [
+                'file:///C:/Users/arifm/Downloads/Asterix/asterix1.png',
+                'file:///C:/Users/arifm/Downloads/Asterix/asterix3.png',
+            ],
+            obelix: [
+                'file:///C:/Users/arifm/Downloads/Asterix/obelix1.jpg',
+                'file:///C:/Users/arifm/Downloads/Asterix/obelix2.jpg',
+                'file:///C:/Users/arifm/Downloads/Asterix/obelix4.jpg'
+            ],
+            idefix: [
+                'file:///C:/Users/arifm/Downloads/Asterix/idefix2.png',
+                'file:///C:/Users/arifm/Downloads/Asterix/idefix4.jpg'
+            ]
+        };
+
+        function showImages(character) {
+            const container = document.getElementById('images');
+            container.innerHTML = '';
+            const imagePaths = templates[character];
+
+            imagePaths.forEach((imagePath) => {
+                const button = document.createElement('button');
+                const img = document.createElement('img');
+                img.src = imagePath;
+                img.alt = 'Malvorlage';
+                button.appendChild(img);
+                button.onclick = () => printImage(imagePath);
+                container.appendChild(button);
+            });
+
+            document.getElementById('mainMenu').style.display = 'none';
+            document.getElementById('backButton').style.display = 'block';
+            container.style.display = 'grid';
+        }
+
+        function printImage(pdfPath) {
+            const printWindow = window.open('', '', 'width=800,height=600');
+            printWindow.document.write(`
+                <html>
+                    <head><title>Drucken</title></head>
+                    <body style="margin: 0; display: flex; justify-content: center; align-items: center; height: 100%;">
+                        <iframe src="${pdfPath}" style="width: 100%; height: 100%;" frameborder="0"></iframe>
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.onload = function() {
+                printWindow.print();
+                printWindow.onafterprint = function () {
+                    printWindow.close();
+                };
+            };
+        }
+
+        function goBack() {
+            document.getElementById('mainMenu').style.display = 'flex';
+            document.getElementById('images').style.display = 'none';
+            document.getElementById('backButton').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
